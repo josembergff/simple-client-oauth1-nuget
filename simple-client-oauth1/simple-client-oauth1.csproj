@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>simple_client_oauth1</RootNamespace>
+    <Authors>Josemberg Farias Ferreira</Authors>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Product>Simple Client Oauth1</Product>
+    <Description>Package that performs simple requests for an Oauth1 service.</Description>
+    <RepositoryUrl>https://github.com/josembergff/simple-client-oauth1</RepositoryUrl>
+    <RepositoryType>Git Hub Open Source</RepositoryType>
+    <PackageProjectUrl>https://github.com/josembergff/simple-client-oauth1/blob/master/README.md</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/josembergff/simple-client-oauth1/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>https://github.com/josembergff/simple-client-oauth1/blob/master/LICENSE</Copyright>
+    <PackageTags>client, oauth, oauth1, request oauth, oauth 1</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageIconUrl>https://github.com/josembergff/simple-client-oauth1/blob/master/simple-client-oauth1.png</PackageIconUrl>
+    <PackageReleaseNotes>Projeto inicial</PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>
