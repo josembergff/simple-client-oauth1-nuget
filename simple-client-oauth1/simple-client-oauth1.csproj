@@ -6,7 +6,14 @@
     <Authors>Josemberg Farias Ferreira</Authors>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Product>Simple Client Oauth1</Product>
-    <Description>Package that performs simple requests for an Oauth1 service.</Description>
+    <Description>Simple Client Oauth1
+Package that performs simple requests for an Oauth1 service.
+
+Install
+&gt; npm install simple-client-oauth1 --save
+
+Other language
+&gt; Package NPM: https://github.com/josembergff/simple-client-oauth1-npm</Description>
     <RepositoryUrl>https://github.com/josembergff/simple-client-oauth1-nuget</RepositoryUrl>
     <RepositoryType>Git Hub Open Source</RepositoryType>
     <PackageProjectUrl>https://github.com/josembergff/simple-client-oauth1-nuget/blob/master/README.md</PackageProjectUrl>

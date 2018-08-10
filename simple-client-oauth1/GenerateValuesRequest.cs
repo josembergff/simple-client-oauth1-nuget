@@ -23,25 +23,46 @@ namespace simple_client_oauth1
         protected const string OAuthTokenKey = "oauth_token";
         protected const string OAuthTokenSecretKey = "oauth_token_secret";
         protected const string HMACSHA1SignatureType = "HMAC-SHA1";
-        private readonly bool includeVersion;
+        private readonly string ConsumerKey;
+        private readonly string ConsumerSecretKey;
+        private readonly string TokenKey;
+        private readonly string TokenSecretKey;
+        private readonly bool IncludeVersion;
+        private readonly SignatureTypes SignatureType;
 
-        public GenerateValuesRequest(bool includeVersion, string version = "1.0")
+        public GenerateValuesRequest(string consumerKey, string consumerSecretKey, string tokenKey, string tokenSecretKey, SignatureTypes signatureType, bool includeVersion, string version = "1.0")
         {
             OAuthVersion = version;
-            this.includeVersion = includeVersion;
+            ConsumerKey = consumerKey;
+            ConsumerSecretKey = consumerSecretKey;
+            TokenKey = tokenKey;
+            TokenSecretKey = tokenSecretKey;
+            IncludeVersion = includeVersion;
+            SignatureType = signatureType;
         }
 
         public Dictionary<string, string> GetParametersRequest(string url, string requestMethod)
         {
+            Dictionary<string, string> retorno;
+
             Uri requesturl = new Uri(url);
             string TimeInSecondsSince1970 = ((int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds).ToString();
             string Nonce = Convert.ToBase64String(Encoding.UTF8.GetBytes(TimeInSecondsSince1970
             + TimeInSecondsSince1970 + TimeInSecondsSince1970));
 
-            string consumer_secret = Uri.EscapeDataString(_config.ConsumerKeyApiPlug);
-            string token_secret = Uri.EscapeDataString(_config.ConsumerTokenSecretApiPlug);
-            var SHA1HASH = GenerateSignature(requesturl, _config.ConsumerKeyApiPlug, _config.ConsumerSecretApiPlug, _config.ConsumerTokenKeyApiPlug, _config.ConsumerTokenSecretApiPlug, requestMethod.ToUpper(), TimeInSecondsSince1970, Nonce);
-            return null;
+            string signatureHash = GenerateSignature(requesturl, ConsumerKey, ConsumerSecretKey, TokenKey, TokenSecretKey, SignatureType, requestMethod.ToUpper(), TimeInSecondsSince1970, Nonce);
+
+            retorno = new Dictionary<string, string> {
+                { OAuthConsumerKeyKey, ConsumerKey },
+                { OAuthNonceKey, Nonce },
+                { OAuthTokenKey, TokenKey },
+                { OAuthSignatureMethodKey, SignatureType.GetDescription() },
+                { OAuthSignatureKey, signatureHash },
+                { OAuthTimestampKey, TimeInSecondsSince1970 },
+                { OAuthVersionKey, OAuthVersion }
+            };
+
+            return retorno;
         }
 
         private string GenerateSignature(Uri url, string consumerKey, string consumerSecret, string token, string tokenSecret, SignatureTypes signatureType, string httpMethod, string timeStamp, string nonce)
@@ -111,7 +132,7 @@ namespace simple_client_oauth1
             }
 
             List<QueryParameter> parameters = GetQueryParameters(url.Query);
-            if (includeVersion)
+            if (IncludeVersion)
             {
                 parameters.Add(new QueryParameter(OAuthVersionKey, OAuthVersion));
             }
