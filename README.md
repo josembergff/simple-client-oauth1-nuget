@@ -1,2 +1,2 @@
-# simple-client-request-oauth1
-Request to Oauth1 
+# Simple Client Oauth1
+Package that performs simple requests for an Oauth1 service.
