@@ -31,7 +31,20 @@ namespace simple_client_oauth1
             this.includeVersion = includeVersion;
         }
 
-        public string GenerateSignature(Uri url, string consumerKey, string consumerSecret, string token, string tokenSecret, SignatureTypes signatureType, string httpMethod, string timeStamp, string nonce)
+        public Dictionary<string, string> GetParametersRequest(string url, string requestMethod)
+        {
+            Uri requesturl = new Uri(url);
+            string TimeInSecondsSince1970 = ((int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds).ToString();
+            string Nonce = Convert.ToBase64String(Encoding.UTF8.GetBytes(TimeInSecondsSince1970
+            + TimeInSecondsSince1970 + TimeInSecondsSince1970));
+
+            string consumer_secret = Uri.EscapeDataString(_config.ConsumerKeyApiPlug);
+            string token_secret = Uri.EscapeDataString(_config.ConsumerTokenSecretApiPlug);
+            var SHA1HASH = GenerateSignature(requesturl, _config.ConsumerKeyApiPlug, _config.ConsumerSecretApiPlug, _config.ConsumerTokenKeyApiPlug, _config.ConsumerTokenSecretApiPlug, requestMethod.ToUpper(), TimeInSecondsSince1970, Nonce);
+            return null;
+        }
+
+        private string GenerateSignature(Uri url, string consumerKey, string consumerSecret, string token, string tokenSecret, SignatureTypes signatureType, string httpMethod, string timeStamp, string nonce)
         {
 
             switch (signatureType)
