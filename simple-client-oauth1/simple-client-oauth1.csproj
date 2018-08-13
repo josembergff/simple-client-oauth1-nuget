@@ -15,7 +15,8 @@
     <PackageTags>client, oauth, oauth1, request oauth, oauth 1</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageIconUrl>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Oauth_logo.svg/598px-Oauth_logo.svg.png</PackageIconUrl>
-    <PackageReleaseNotes>Projeto inicial</PackageReleaseNotes>
+    <PackageReleaseNotes>Correção de erro de "GetDescription".</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
