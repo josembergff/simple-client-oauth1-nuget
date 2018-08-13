@@ -65,6 +65,27 @@ namespace simple_client_oauth1
             return retorno;
         }
 
+        public string GetHttpClienteUrl(string url, string method)
+        {
+            var retorno = "";
+            var valoresHeader = GetParametersRequest(url, method);
+            foreach (var valor in valoresHeader)
+            {
+                retorno = $"{retorno}&{valor.Key}={valor.Value}";
+            }
+            if (url.IndexOf("?") < 0)
+            {
+                retorno = retorno.Substring(1, (retorno.Length - 1));
+                retorno = $"{url}?{retorno}";
+            }
+            else
+            {
+                retorno = $"{url}{retorno}";
+            }
+
+            return retorno;
+        }
+
         private string GenerateSignature(Uri url, string consumerKey, string consumerSecret, string token, string tokenSecret, SignatureTypes signatureType, string httpMethod, string timeStamp, string nonce)
         {
 
